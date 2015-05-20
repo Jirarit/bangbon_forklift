@@ -782,7 +782,6 @@ class FormHelperTest extends CakeTestCase {
 				'type' => 'text',
 				'name' => 'data[ValidateUser][cost_decimal]',
 				'id' => 'ValidateUserCostDecimal',
-				'maxlength' => 6,
 			)),
 			'/div'
 		);
@@ -8643,6 +8642,7 @@ class FormHelperTest extends CakeTestCase {
 			'escape' => false,
 			'url' => array(
 				'action' => 'edit',
+				'0',
 				'myparam'
 			)
 		));
@@ -8650,7 +8650,7 @@ class FormHelperTest extends CakeTestCase {
 			'form' => array(
 				'id' => 'ContactAddForm',
 				'method' => 'post',
-				'action' => '/contacts/edit/myparam',
+				'action' => '/contacts/edit/0/myparam',
 				'accept-charset' => $encoding
 			),
 			'div' => array('style' => 'display:none;'),
@@ -8668,8 +8668,8 @@ class FormHelperTest extends CakeTestCase {
 	public function testCreateNoErrorsWithMockModel() {
 		$encoding = strtolower(Configure::read('App.encoding'));
 		$ContactMock = $this->getMockBuilder('Contact')
-				->disableOriginalConstructor()
-				->getMock();
+			->disableOriginalConstructor()
+			->getMock();
 		ClassRegistry::removeObject('Contact');
 		ClassRegistry::addObject('Contact', $ContactMock);
 		$result = $this->Form->create('Contact', array('type' => 'GET'));

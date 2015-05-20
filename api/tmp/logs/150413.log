@@ -1,0 +1,6 @@
+D[085112:444759] {000000000000000000}<Authen::login> Request login by root
+I[085112:467614] {150413085112464588}<Authen::login> Login with user root success and get SSID #150413085112464588
+D[113617:863500] {000000000000000000}<Authen::login> Request login by root
+E[113617:882759] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:42601 DriverCode:7 DriverInfo:ERROR:  syntax error at or near "SELECTs"
+LINE 1: SELECTs id,login,pass,enable FROM auth.users WHERE login = $...
+        ^ @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)

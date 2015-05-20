@@ -76,19 +76,46 @@ class DATABASE_CONFIG {
 		'login' => 'jao',
 		'password' => 'jao',
 		'database' => 'bbf',
-		'schema' => 'public',
 		'prefix' => '',
-		'encoding' => 'utf8',
+		'encoding' => 'utf8'
 	);
 
-	public $test = array(
-		'datasource' => 'Database/Mysql',
+	public $app = array(
+		'datasource' => 'Database/Postgres',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'test_database_name',
+		'port' => '5432',
+		'login' => 'jao',
+		'password' => 'jao',
+		'database' => 'bbf',
+        'schema' => 'app',
 		'prefix' => '',
-		//'encoding' => 'utf8',
+		'encoding' => 'utf8'
+	);
+
+	public $info = array(
+		'datasource' => 'Database/Postgres',
+		'persistent' => false,
+		'host' => 'localhost',
+		'port' => '5432',
+		'login' => 'jao',
+		'password' => 'jao',
+		'database' => 'bbf',
+        'schema' => 'info',
+		'prefix' => '',
+		'encoding' => 'utf8'
+	);
+
+	public $trans = array(
+		'datasource' => 'Database/Postgres',
+		'persistent' => false,
+		'host' => 'localhost',
+		'port' => '5432',
+		'login' => 'jao',
+		'password' => 'jao',
+		'database' => 'bbf',
+        'schema' => 'trans',
+		'prefix' => '',
+		'encoding' => 'utf8'
 	);
 }

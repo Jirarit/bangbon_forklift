@@ -31,4 +31,36 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    var $uses = array('Menu');
+    var $components = array('Session', 'Cookie', 'RequestHandler');
+    
+    var $ignoreSession = array('CakeError::*', 'Authens::*');
+    
+    var $loginPage = "Authens::login";
+    
+    public function beforeFilter() {
+        parent::beforeFilter();
+
+        /* Use Cookie if Session not exist */
+        if($this->Session->check('USER') === FALSE && $this->Cookie->check('USER') === TRUE){
+            $this->Session->write("USER", $this->Cookie->read("USER"));
+        }
+
+        /* Check Session and redirect page */
+        $page = array("{$this->name}::$this->action", "{$this->name}::*", "*::*");
+        if($this->Session->check('USER') === TRUE && in_array($this->loginPage, $page)){
+            /* Session exists and current page = login page => redirect to Home */
+            $this->redirect(array('controller'=>'Home', 'action'=>'index'));
+        }elseif($this->Session->check('USER') === FALSE && array_intersect($this->ignoreSession, $page) === array()){
+            /* Session not exists and current page require session => redirect to Login */
+            $this->redirect(array('controller'=>'Authens', 'action'=>'login'));
+        }
+
+        /* Set left menus */
+        $this->set('menus', $this->Menu->accessible_menu('L'));
+
+        /* Handle mobile */
+        $is_mobile = $this->RequestHandler->isMobile();
+        $this->set('is_mobile', $is_mobile);
+    }
 }

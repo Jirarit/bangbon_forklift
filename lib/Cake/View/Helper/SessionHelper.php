@@ -129,11 +129,14 @@ class SessionHelper extends AppHelper {
 			}
 
 			if ($flash['element'] === 'default') {
-				$class = 'message';
+				$class = 'alert ';
 				if (!empty($flash['params']['class'])) {
-					$class = $flash['params']['class'];
-				}
-				$out = '<div id="' . $key . 'Message" class="' . $class . '">' . $message . '</div>';
+					$class .= $flash['params']['class'];
+				}else{
+                    $class .= "alert-info";
+                }
+                $style = "position:fixed;width:auto;z-index:9999;top:5px;padding-top:5px;padding-bottom:5px;";
+				$out = "<div id='{$key}Message' class='{$class}' style='{$style}'>{$message}</div>";
 			} elseif (!$flash['element']) {
 				$out = $message;
 			} else {

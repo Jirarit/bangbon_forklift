@@ -30,4 +30,28 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+    
+    public function beforeSave($options = array()) {
+        $is_create = !isset($this->data[$this->alias]['id']);
+        if(isset($_SESSION['USER']['id'])){
+            if($is_create)
+            {
+              $this->data[$this->alias]['created'] = date('Y-m-d H:i:s');
+              $this->data[$this->alias]['_create_uid'] = $_SESSION['USER']['id'];
+            }
+            $this->data[$this->alias]['_update_uid'] = $_SESSION['USER']['id'];
+        }
+        if($is_create) {
+            $this->data[$this->alias]['created'] = date('Y-m-d H:i:s');
+        }
+        $this->data[$this->alias]['modified'] = date('Y-m-d H:i:s');
+        $this->data[$this->alias]['_version'] = $this->tm18();
+        return true;
+    }
+    
+    public function tm18() {
+        $msec = explode(' ',microtime());
+        $msec = $msec[0] * 1000000;
+        return date("ymdHis") . sprintf("%06d",$msec);
+    }
 }

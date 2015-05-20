@@ -1,5 +1,29 @@
 <IfModule mod_rewrite.c>
    RewriteEngine on
    RewriteRule    ^$ app/webroot/    [L]
+
+   RewriteCond %{REQUEST_URI} ^/api/conf/
+   RewriteRule	(.*) - [R=403,L]	
+
+   RewriteCond %{REQUEST_URI} ^/api/class/
+   RewriteRule	(.*) - [R=403,L]	
+
+   RewriteCond %{REQUEST_URI} ^/api/lib/
+   RewriteRule	(.*) - [R=403,L]	
+
+   RewriteCond %{REQUEST_URI} ^/api/method/
+   RewriteRule	(.*) - [R=403,L]	
+
+   RewriteCond %{REQUEST_URI} ^/api/tmp/
+   RewriteRule	(.*) - [R=403,L]	
+
+   RewriteCond %{REQUEST_URI} ^/file/conf/
+   RewriteRule	(.*) - [R=403,L]	
+
+   RewriteCond %{REQUEST_URI} ^/file/pro/
+   RewriteRule	(.*) - [R=403,L]	
+
+   RewriteCond %{REQUEST_URI} !^/api/
+   RewriteCond %{REQUEST_URI} !^/file/
    RewriteRule    (.*) app/webroot/$1 [L]
 </IfModule>

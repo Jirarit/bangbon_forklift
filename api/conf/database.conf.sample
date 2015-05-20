@@ -1,0 +1,14 @@
+<?php
+/*---------------------------------------------------------------------------
+Sample Database Config File
+To use just copy this file to database.conf
+---------------------------------------------------------------------------*/
+
+define('DB_TYPE', 'pgsql');
+define('DB_HOST', '127.0.0.1');
+define('DB_PORT', '5432');
+define('DB_NAME', '');
+define('DB_USER', '');
+define('DB_PASS', '');
+
+?>

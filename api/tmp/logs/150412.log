@@ -1,0 +1,61 @@
+E[022247:314712] {000000000000000000}<Server::process> Catch Exception [-32600] Empty raw request @/home/jao/bangbon_forklift/api/Server.php (Line:38)
+E[022247:315517] {000000000000000000}<ErrorHandler> Notice: Undefined variable: requestObj @/home/jao/bangbon_forklift/api/Server.php (Line:54)
+E[022247:316071] {000000000000000000}<ErrorHandler> Notice: Trying to get property of non-object @/home/jao/bangbon_forklift/api/Server.php (Line:54)
+E[022248:013552] {000000000000000000}<Server::process> Catch Exception [-32600] Empty raw request @/home/jao/bangbon_forklift/api/Server.php (Line:38)
+E[022248:013928] {000000000000000000}<ErrorHandler> Notice: Undefined variable: requestObj @/home/jao/bangbon_forklift/api/Server.php (Line:54)
+E[022248:014158] {000000000000000000}<ErrorHandler> Notice: Trying to get property of non-object @/home/jao/bangbon_forklift/api/Server.php (Line:54)
+E[022322:277650] {000000000000000000}<Authen::login> Catch Exception [-32601] File method not exists @/home/jao/bangbon_forklift/api/Server.php (Line:145)
+E[023757:654752] {000000000000000000}<Authen::login> Catch Exception [-32601] File method not exists @/home/jao/bangbon_forklift/api/Server.php (Line:145)
+E[031615:739372] {000000000000000000}<Authen::login> Catch Exception [-32601] File method not exists @/home/jao/bangbon_forklift/api/Server.php (Line:145)
+E[121252:175521] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:42P01 DriverCode:7 DriverInfo:ERROR:  relation "auth.users" does not exist
+LINE 1: SELECT * FROM auth.users WHERE login = $1
+                      ^ @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)
+E[121359:308173] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:42P01 DriverCode:7 DriverInfo:ERROR:  relation "auth.users" does not exist
+LINE 1: SELECT * FROM auth.users WHERE login = $1
+                      ^ @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)
+E[124041:325161] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:23502 DriverCode:7 DriverInfo:ERROR:  null value in column "created" violates not-null constraint
+DETAIL:  Failing row contains (2, a, b                               , c, 0, Y, null, null, null, null, 150412124041320816). @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)
+E[124127:081825] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:23502 DriverCode:7 DriverInfo:ERROR:  null value in column "_create_uid" violates not-null constraint
+DETAIL:  Failing row contains (3, a, b                               , c, 0, Y, 2015-04-12 12:41:27.07803, 2015-04-12 12:41:27.07803, null, null, 150412124127078030). @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)
+E[124150:189921] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:42703 DriverCode:7 DriverInfo:ERROR:  column "create_uid" of relation "users" does not exist
+LINE 1: ...INTO auth.users(login, pass,name,created,modified,create_uid...
+                                                             ^ @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)
+E[124348:157460] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:42601 DriverCode:7 DriverInfo:ERROR:  syntax error at or near "="
+LINE 1: update auth.usersset login = 'root'
+                                   ^ @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)
+E[124401:139816] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:23505 DriverCode:7 DriverInfo:ERROR:  duplicate key value violates unique constraint "idx_users_login"
+DETAIL:  Key (login)=(root) already exists. @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)
+E[125328:137946] {000000000000000000}<ShutdownHandler> Fatal error: Call to undefined method PDOStatement::lastInsertId() @/home/jao/bangbon_forklift/api/lib/Database.php (Line:189)
+E[125612:933960] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:23505 DriverCode:7 DriverInfo:ERROR:  duplicate key value violates unique constraint "idx_users_login"
+DETAIL:  Key (login)=(d) already exists. @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)
+E[130003:625752] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:23505 DriverCode:7 DriverInfo:ERROR:  duplicate key value violates unique constraint "idx_users_login"
+DETAIL:  Key (login)=(d) already exists. @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)
+E[130039:652556] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:23505 DriverCode:7 DriverInfo:ERROR:  duplicate key value violates unique constraint "idx_users_login"
+DETAIL:  Key (login)=(e) already exists. @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)
+E[130227:856643] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:23505 DriverCode:7 DriverInfo:ERROR:  duplicate key value violates unique constraint "idx_users_login"
+DETAIL:  Key (login)=(f) already exists. @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)
+E[130357:397171] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:23505 DriverCode:7 DriverInfo:ERROR:  duplicate key value violates unique constraint "idx_users_login"
+DETAIL:  Key (login)=(g) already exists. @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)
+D[145351:931671] {000000000000000000}<Authen::login> Request login by root
+E[145351:954057] {000000000000000000}<Authen::login> Catch Exception [-32603] Excute sqlState:42601 DriverCode:7 DriverInfo:ERROR:  syntax error at or near "="
+LINE 1: SELECT id,login,pass,enable FROM auth.usersWHERE login = $1
+                                                               ^ @/home/jao/bangbon_forklift/api/lib/Database.php (Line:33)
+D[145423:568908] {000000000000000000}<Authen::login> Request login by root
+W[145423:588737] {000000000000000000}<Authen::login> Login with user root fail. Password wrong
+D[145638:554718] {000000000000000000}<Authen::login> Request login by root
+E[145638:576914] {000000000000000000}<ErrorHandler> Warning: Missing argument 1 for Logs::info(), called in /home/jao/bangbon_forklift/api/methods/Authen.php on line 57 and defined @/home/jao/bangbon_forklift/api/lib/Logs.php (Line:18)
+E[145638:577052] {000000000000000000}<ErrorHandler> Notice: Undefined variable: message @/home/jao/bangbon_forklift/api/lib/Logs.php (Line:21)
+I[145638:577117] {000000000000000000}<Authen::login> 
+I[145638:577268] {150412145639575422}<Authen::login> Login with user root success and get SSID #150412145639575422
+D[145829:536438] {000000000000000000}<Authen::login> Request login by root
+E[145829:558370] {000000000000000000}<ErrorHandler> Warning: Missing argument 1 for Logs::info(), called in /home/jao/bangbon_forklift/api/methods/Authen.php on line 57 and defined @/home/jao/bangbon_forklift/api/lib/Logs.php (Line:18)
+E[145829:558570] {000000000000000000}<ErrorHandler> Notice: Undefined variable: message @/home/jao/bangbon_forklift/api/lib/Logs.php (Line:21)
+I[145829:558659] {000000000000000000}<Authen::login> 
+I[145829:558832] {150412145830554950}<Authen::login> Login with user root success and get SSID #150412145830554950
+D[162613:561482] {000000000000000000}<Authen::login> Request login by root
+E[162613:583208] {000000000000000000}<ErrorHandler> Warning: Missing argument 1 for Logs::info(), called in /home/jao/bangbon_forklift/api/methods/Authen.php on line 55 and defined @/home/jao/bangbon_forklift/api/lib/Logs.php (Line:18)
+E[162613:583340] {000000000000000000}<ErrorHandler> Notice: Undefined variable: message @/home/jao/bangbon_forklift/api/lib/Logs.php (Line:21)
+I[162613:583404] {000000000000000000}<Authen::login> 
+I[162613:583552] {150412162614581615}<Authen::login> Login with user root success and get SSID #150412162614581615
+D[162843:227254] {000000000000000000}<Authen::login> Request login by root
+I[162843:247947] {150412162843246232}<Authen::login> Login with user root success and get SSID #150412162843246232
