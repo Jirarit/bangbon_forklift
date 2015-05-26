@@ -15,26 +15,70 @@ class ContractsController extends AppController {
  * @var array
  */
 	public $components = array('Paginator', 'Session');
+	public $helpers = array('Flag');
 
 /**
  * index method
  *
  * @return void
  */
-	public function index($status = 'A') {
+	public function index() {
 		$this->Contract->recursive = 0;
         if ($this->request->is('post')) {
             $search = $this->request->data['Contract']['search'];
-            $options['conditions']['OR'] = [
-                            'Serial.serial_no ILIKE'=>"%{$search}%",
-                            'Product.name ILIKE'=>"%{$search}%",
-                            'Customer.name ILIKE'=>"%{$search}%"
-                        ];
+            $this->Paginator->settings = array(
+                'conditions' => array('OR' => [
+                                                'Customer.name ILIKE' => "%{$search}%", 
+                                                'Customer.name_en ILIKE' => "%{$search}%",
+                                                'Product.name ILIKE' => "%{$search}%", 
+                                                'Serial.serial_no ILIKE' => "%{$search}%"
+                                            ]),
+                'limit' => 10
+            );
+            if(isset($this->request->data['Contract']['status'])){
+                $this->Paginator->settings['conditions']['Contract.status'] = $this->request->data['Contract']['status'];
+            }
+            if(isset($this->request->data['Contract']['start_form'])){
+                $this->Paginator->settings['conditions']['Contract.contract_date >='] = $this->request->data['Contract']['start_form'];
+            }
+            if(isset($this->request->data['Contract']['start_to'])){
+                $this->Paginator->settings['conditions']['Contract.contract_date <='] = $this->request->data['Contract']['start_to'];
+            }
+            if(isset($this->request->data['Contract']['expire_form'])){
+                $this->Paginator->settings['conditions']['Contract.contract_date >='] = $this->request->data['Contract']['expire_form'];
+            }
+            if(isset($this->request->data['Contract']['expire_to'])){
+                $this->Paginator->settings['conditions']['Contract.contract_date <='] = $this->request->data['Contract']['expire_to'];
+            }
         }
-        
-        $options['order'] = ['contract_expire DESC'];
-        $options['limit'] = 10;
-		$this->set('contracts', $this->Contract->find('all', $options));
+        $this->Paginator->settings['joins'] = [
+                                                [
+                                                    "table" => "info.product_serials",
+                                                    "alias" => "Serial",
+                                                    "type" => "LEFT",
+                                                    "conditions" => array(
+                                                        "Contract.product_serial_id = Serial.id"
+                                                    )
+                                                ],
+                                                [
+                                                    "table" => "info.products",
+                                                    "alias" => "Product",
+                                                    "type" => "LEFT",
+                                                    "conditions" => array(
+                                                        "Contract.product_id = Product.id"
+                                                    )
+                                                ],
+                                                [
+                                                    "table" => "info.customers",
+                                                    "alias" => "Customer",
+                                                    "type" => "LEFT",
+                                                    "conditions" => array(
+                                                        "Contract.customer_id = Customer.id"
+                                                    )
+                                                ],
+                                            ];
+        $this->Paginator->settings['order'] = array('Contract.contract_date');
+		$this->set('contracts', $this->Paginator->paginate());
 	}
 
 /**
@@ -67,6 +111,9 @@ class ContractsController extends AppController {
 				$this->Session->setFlash(__('The contract could not be saved. Please, try again.'));
 			}
 		}
+		$products = $this->Contract->Serial->productWithSerial();
+		$customers = $this->Contract->CustomerLocation->customerWithLocation();
+		$this->set(compact('products', 'customers'));
 	}
 
 /**
@@ -91,6 +138,11 @@ class ContractsController extends AppController {
 			$options = array('conditions' => array('Contract.' . $this->Contract->primaryKey => $id));
 			$this->request->data = $this->Contract->find('first', $options);
 		}
+		$products = $this->Contract->Product->find('list');
+		$serials = $this->Contract->Serial->find('list');
+		$customers = $this->Contract->Customer->find('list');
+		$customerLocations = $this->Contract->CustomerLocation->find('list');
+		$this->set(compact('products', 'serials', 'customers', 'customerLocations'));
 	}
 
 /**

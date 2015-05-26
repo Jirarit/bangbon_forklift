@@ -108,10 +108,6 @@ h1.page-header {
         margin-top: -1px;
         vertical-align: middle;
     }
-
-    .bootstrap-datetimepicker-widget{
-        font-size: 98%;
-    }
 }
 /* Layout */
 
@@ -229,35 +225,35 @@ select.width-auto {
 }
 
 .datePicker {
-    max-width: 100px !important;
-    padding-left: 5px;
-    padding-right: 5px;
+    width: 100px !important;
 }
 
 input.datePicker-readonly {
     background-color: white !important;
 }
 
-.input-group-date {
-    max-width: 200px;
-    margin-bottom: 15px;
+input.datePicker-group {
+    position: relative;
+    display: inline;
 }
-.input-group-date {
-    max-width: 200px;
-    margin-bottom: 15px;
+
+input.datePicker-group-from {
+    display: inline;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
 }
-.input-group-date input:first-child {
-    -webkit-border-radius: 3px 0 0 3px;
-    -moz-border-radius: 3px 0 0 3px;
-    border-radius: 3px 0 0 3px;
+
+span.datePicker-group-separate {
+    display: inline;
+    margin-left: -4px;
+    margin-right: -4px;
+    padding-top: 11px;
+    padding-bottom: 9px;
 }
-.input-group-date input:last-child {
-  -webkit-border-radius: 0 3px 3px 0;
-  -moz-border-radius: 0 3px 3px 0;
-  border-radius: 0 3px 3px 0;
-}
-.addon-to-date {
-    padding-left: 5px;
-    padding-right: 5px;
+
+input.datePicker-group-to {
+    display: inline;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
 }
 /* Inner div page-wrapper */

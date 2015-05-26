@@ -37,7 +37,7 @@
                 <tr data-toggle="modal" data-target="#recordAction" data-contract="<?php echo $contract['Contract']['contract_no']; ?>" data-id="<?php echo $contract['Contract']['id']; ?>">
                     <td class="text-center"><?php echo h($k+1); ?></td>
                     <td><?php echo h($contract['Contract']['contract_no']); ?>&nbsp;</td>
-                    <td><?php echo h($contract['Contract']['contract_start']); ?>&nbsp;</td>
+                    <td><?php echo h($contract['Contract']['contract_date']); ?>&nbsp;</td>
                     <td><?php echo h($contract['Contract']['contract_expire']); ?>&nbsp;</td>
                     <td>
                         <?php echo h($contract['Customer']['name']); ?><br>
@@ -48,16 +48,17 @@
                     <td>
                         <?php echo h($contract['Serial']['serial_no']); ?><br>
                         <small>
-                            <?php echo $contract['Product']['name'] . $contract['Product']['model']; ?>
+                            <?php echo $contract['Product']['name'] . ' ' . $contract['Product']['model']; ?>
                         </small>
                     </td>
-                    <td class="hidden-sm hidden-xs fit-content"><?php echo h($contract['Contract']['modified']); ?>&nbsp;</td>
+                    <td class="hidden-sm hidden-xs data-money"><?php echo h($contract['Contract']['price']); ?>&nbsp;</td>
+                    <td class="hidden-sm hidden-xs data-status"><?php echo h($contract['Contract']['status']); ?>&nbsp;</td>
                     <td class="hidden-sm hidden-xs text-center" style="width: 180px">
                         <div class="btn-group" role="group" aria-label="...">
                         <?php
                             echo $this->Html->link(__('View'), array('action' => 'view', $contract['Contract']['id']), array('class'=>'btn btn-default btn-action'));
                             echo $this->Html->link(__('Edit'), array('action' => 'edit', $contract['Contract']['id']), array('class'=>'btn btn-default btn-action'));
-                            echo $this->Html->link(__('Delete'), array('action' => 'delete', $contract['Contract']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $contract['Contract']['login']), 'class'=>'btn btn-default btn-action'));
+                            echo $this->Html->link(__('Delete'), array('action' => 'delete', $contract['Contract']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $contract['Contract']['contract_no']), 'class'=>'btn btn-default btn-action'));
                         ?>
                         </div>
                     </td>
@@ -112,32 +113,29 @@
                     <div class="col-xs-12">
                         <?php echo $this->Form->input('search', array('id'=>'ContractSearch2', 'div'=>array('class'=>'form-group'), 'class'=>'form-control', 'label'=>'Keyword', 'placeholder'=>'PO, PR, Serial ...')); ?>
                     </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <?php
-                        echo '<label for="ContractStartFrom">Start Date</label>';
-                        echo '<div class="input-group input-group-date">';
-                        echo $this->Form->input('start_from', array('label'=>FALSE, 'div'=>FALSE, 'class'=>'form-control datePicker datePicker-readonly'));
-                        echo '<span class="input-group-addon addon-to-date">To</span>';
-                        echo $this->Form->input('start_to', array('label'=>FALSE, 'div'=>FALSE, 'class'=>'form-control datePicker datePicker-readonly'));
-                        echo '</div>';
-                        ?>
+                    
+                    <div class="col-xs-12">
+                        <label for="ContractStartFrom">Contract Date</label><br>
+                        <div class="datePicker-group">
+                            <?php echo $this->Form->input('start_from', array('label'=>FALSE, 'div'=>FALSE, 'class'=>'form-control datePicker datePicker-readonly datePicker-group-from')); ?>
+                            <span class="input-group-addon datePicker-group-separate">TO</span>
+                            <?php echo $this->Form->input('start_to', array('label'=>FALSE, 'div'=>FALSE, 'class'=>'form-control datePicker datePicker-readonly datePicker-group-to')); ?>
+                        </div>
                     </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <?php
-                        echo '<label for="ContractExpireFrom">Expire Date</label>';
-                        echo '<div class="input-group input-group-date">';
-                        echo $this->Form->input('expire_from', array('label'=>FALSE, 'div'=>FALSE, 'class'=>'form-control datePicker datePicker-readonly'));
-                        echo '<span class="input-group-addon addon-to-date">To</span>';
-                        echo $this->Form->input('expire_to', array('label'=>FALSE, 'div'=>FALSE, 'class'=>'form-control datePicker datePicker-readonly'));
-                        echo '</div>';
-                        ?>
+                    
+                    <div class="col-xs-12">
+                        <label for="ContractStartFrom">Expire Date</label><br>
+                        <div class="datePicker-group">
+                            <?php echo $this->Form->input('expire_from', array('label'=>FALSE, 'div'=>FALSE, 'class'=>'form-control datePicker datePicker-readonly datePicker-group-from')); ?>
+                            <span class="input-group-addon datePicker-group-separate">TO</span>
+                            <?php echo $this->Form->input('expire_to', array('label'=>FALSE, 'div'=>FALSE, 'class'=>'form-control datePicker datePicker-readonly datePicker-group-to')); ?>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xs-12">
+                        <?php echo $this->Form->input('status', array('div'=>array('class'=>'form-group'), 'class'=>'form-control width-auto', 'options'=>$this->Flag->contractStatus())); ?>
                     </div>
                 </div>
-                <?php
-                
-                echo $this->Form->input('status', array('div'=>array('class'=>'form-group'), 'class'=>'form-control width-auto', 'options'=>$this->Flag->contractStatus()));
-                
-                ?>
             </div>
             <div class="modal-footer">
                 <?php
