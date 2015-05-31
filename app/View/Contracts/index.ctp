@@ -42,7 +42,7 @@
                     <td>
                         <?php echo h($contract['Customer']['name']); ?><br>
                         <small>
-                            <?php echo $contract['CustomerLocation']['branch_name'] . $contract['CustomerLocation']['zone_name']; ?>
+                            <?php echo $contract['CustomerLocation']['branch_name'] . ' ' . $contract['CustomerLocation']['zone_name']; ?>
                         </small>
                     </td>
                     <td>

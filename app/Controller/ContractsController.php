@@ -138,11 +138,9 @@ class ContractsController extends AppController {
 			$options = array('conditions' => array('Contract.' . $this->Contract->primaryKey => $id));
 			$this->request->data = $this->Contract->find('first', $options);
 		}
-		$products = $this->Contract->Product->find('list');
-		$serials = $this->Contract->Serial->find('list');
-		$customers = $this->Contract->Customer->find('list');
-		$customerLocations = $this->Contract->CustomerLocation->find('list');
-		$this->set(compact('products', 'serials', 'customers', 'customerLocations'));
+		$products = $this->Contract->Serial->productWithSerial();
+		$customers = $this->Contract->CustomerLocation->customerWithLocation();
+		$this->set(compact('products', 'customers'));
 	}
 
 /**
