@@ -104,7 +104,7 @@ class CustomersController extends AppController {
 		if (!$this->Customer->exists()) {
 			throw new NotFoundException(__('Invalid customer'));
 		}
-		$data = [];
+		$data = array();
         $data['Customer']['id'] = $id;
         $data['Customer']['enable'] = 'D';
 		if ($this->Customer->save($data)) {
@@ -173,7 +173,7 @@ class CustomersController extends AppController {
 			throw new NotFoundException(__('Invalid customer location'));
 		}
 
-        $data = [];
+        $data = array();
         $data['CustomerLocation']['id'] = $location_id;
         $data['CustomerLocation']['enable'] = 'D';
 		if ($this->CustomerLocation->save($data)) {

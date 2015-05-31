@@ -29,7 +29,7 @@ class ProductsController extends AppController {
         if ($this->request->is('post')) {
             $search = $this->request->data['Product']['search'];
             $this->Paginator->settings = array(
-                'conditions' => array('OR' => ['Product.name ILIKE' => "%{$search}%", 'Product.name_en ILIKE' => "%{$search}%"]),
+                'conditions' => array('OR' => array('Product.name ILIKE' => "%{$search}%", 'Product.name_en ILIKE' => "%{$search}%")),
                 'limit' => 10
             );
         }
@@ -72,7 +72,7 @@ class ProductsController extends AppController {
 		}
 		$this->set('product_id', $id);
 		$this->set('product', $product);
-		$this->set('serials', $this->ProductSerial->find('all', array('conditions'=>['product_id'=>$id, 'status !='=>'D'], 'order'=>'serial_no')));
+		$this->set('serials', $this->ProductSerial->find('all', array('conditions'=>array('product_id'=>$id, 'status !='=>'D'), 'order'=>'serial_no')));
 	}
 
 /**
@@ -83,14 +83,14 @@ class ProductsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
             $this->Session->write('ADD_PRODUCT.Product', $this->request->data['Product']);
-            $this->Session->write('ADD_PRODUCT.Property.code', $this->ProductCategory->field('code',['id'=>$this->request->data['Product']['category_id']]));
+            $this->Session->write('ADD_PRODUCT.Property.code', $this->ProductCategory->field('code',array('id'=>$this->request->data['Product']['category_id'])));
 			return $this->redirect(array('action' => 'add_property'));
 		}
         $this->request->data = $this->Session->read('ADD_PRODUCT');
         if(empty($this->request->data['Product']['price'])) $this->request->data['Product']['price'] = '0.00';
         if(empty($this->request->data['Product']['cost'])) $this->request->data['Product']['cost'] = '0.00';
-        $this->set('category_opt', $this->ProductCategory->find('list',array('conditions'=>['enable'=>'Y'], 'order'=>['sort', 'name'])));
-        $this->set('brand_opt', $this->ProductBrand->find('list',array('conditions'=>['enable'=>'Y'], 'order'=>['name'])));
+        $this->set('category_opt', $this->ProductCategory->find('list',array('conditions'=>['enable'=>'Y'], 'order'=>array('sort', 'name'))));
+        $this->set('brand_opt', $this->ProductBrand->find('list',array('conditions'=>['enable'=>'Y'], 'order'=>array('name'))));
 	}
 
     public function add_property() {
@@ -112,7 +112,7 @@ class ProductsController extends AppController {
             return $this->redirect(array('action' => 'add_property'));
         }
         
-        $this->set('serials', (empty($session_data['Serial']) ? [] : $session_data['Serial']));
+        $this->set('serials', (empty($session_data['Serial']) ? array() : $session_data['Serial']));
     }
     
     public function add_serial_rm($serial_key){
@@ -124,7 +124,7 @@ class ProductsController extends AppController {
     public function add_serial_add(){
         if ($this->request->is('post')) {
             $serial = $this->Session->read('ADD_PRODUCT.Serial');
-            if(empty($serial)) $serial = [];
+            if(empty($serial)) $serial = array();
             array_push($serial, $this->request->data['Serial']);
             $this->Session->write('ADD_PRODUCT.Serial', $serial);
             return $this->redirect(array('action' => 'add_serial'));
@@ -141,7 +141,7 @@ class ProductsController extends AppController {
         $productSource = $this->Product->getDataSource();
         $productSource->begin();
         
-        $d = [];
+        $d = array();
         $d['Product'] = $data['Product'];
         if(!$this->Product->save($d)){
             $this->Session->setFlash(__('The product cannot create.'));
@@ -149,7 +149,7 @@ class ProductsController extends AppController {
         }
         $product_id = $this->Product->id;
         
-        $d = [];
+        $d = array();
         $d = $data['Property'];
         $d['id'] = $product_id;
         $this->ProductProperty->useProperty($data['Property']['code']);
@@ -160,7 +160,7 @@ class ProductsController extends AppController {
         
         if(!empty($data['Serial'])){
             foreach($data['Serial'] as $k => $serial){
-                $d = [];
+                $d = array();
                 $d['ProductSerial']['product_id'] = $product_id;
                 $d['ProductSerial']['serial_no'] = $serial['no'];
                 $d['ProductSerial']['manufacture_date'] = $serial['date'];
@@ -254,7 +254,7 @@ class ProductsController extends AppController {
 		if (!$this->Product->exists()) {
 			throw new NotFoundException(__('Invalid product'));
 		}
-        $data = [];
+        $data = array();
         $data['ProductSerial']['id'] = $serial_id;
         $data['ProductSerial']['status'] = 'D';
 		if ($this->ProductSerial->save($data)) {
@@ -288,7 +288,7 @@ class ProductsController extends AppController {
 		if (!$this->Product->exists()) {
 			throw new NotFoundException(__('Invalid product'));
 		}
-        $data = [];
+        $data = array();
         $data['Product']['id'] = $id;
         $data['Product']['enable'] = 'D';
 		if ($this->Product->save($data)) {

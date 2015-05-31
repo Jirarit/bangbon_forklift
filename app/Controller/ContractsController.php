@@ -27,12 +27,12 @@ class ContractsController extends AppController {
         if ($this->request->is('post')) {
             $search = $this->request->data['Contract']['search'];
             $this->Paginator->settings = array(
-                'conditions' => array('OR' => [
+                'conditions' => array('OR' => array(
                                                 'Customer.name ILIKE' => "%{$search}%", 
                                                 'Customer.name_en ILIKE' => "%{$search}%",
                                                 'Product.name ILIKE' => "%{$search}%", 
                                                 'Serial.serial_no ILIKE' => "%{$search}%"
-                                            ]),
+                                            )),
                 'limit' => 10
             );
             if(isset($this->request->data['Contract']['status'])){
@@ -51,32 +51,32 @@ class ContractsController extends AppController {
                 $this->Paginator->settings['conditions']['Contract.contract_date <='] = $this->request->data['Contract']['expire_to'];
             }
         }
-        $this->Paginator->settings['joins'] = [
-                                                [
+        $this->Paginator->settings['joins'] = array(
+                                                array(
                                                     "table" => "info.product_serials",
                                                     "alias" => "Serial",
                                                     "type" => "LEFT",
                                                     "conditions" => array(
                                                         "Contract.product_serial_id = Serial.id"
                                                     )
-                                                ],
-                                                [
+                                                ),
+                                                array(
                                                     "table" => "info.products",
                                                     "alias" => "Product",
                                                     "type" => "LEFT",
                                                     "conditions" => array(
                                                         "Contract.product_id = Product.id"
                                                     )
-                                                ],
-                                                [
+                                                ),
+                                                array(
                                                     "table" => "info.customers",
                                                     "alias" => "Customer",
                                                     "type" => "LEFT",
                                                     "conditions" => array(
                                                         "Contract.customer_id = Customer.id"
                                                     )
-                                                ],
-                                            ];
+                                                ),
+                                            );
         $this->Paginator->settings['order'] = array('Contract.contract_date');
 		$this->set('contracts', $this->Paginator->paginate());
 	}
