@@ -23,7 +23,7 @@ class Menu extends AppModel {
     public function accessible_menu($type, $parent = 0) {
         $menus = $this->find('all', array('conditions'=>array('enable'=>'Y', 'parent'=>$parent, 'type'=>$type), 'order'=>array('sort', 'id')));
         $Rule = ClassRegistry::init('Rule');
-        $result = [];
+        $result = array();
         foreach($menus as $menu){
             $item = $menu['Menu']['item'];
             $action = $menu['Menu']['action'];
