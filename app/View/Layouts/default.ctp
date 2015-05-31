@@ -27,7 +27,7 @@ $enableNotice = TRUE;
 $enableAcl = TRUE;
 
 /* Calendar */
-$calDay = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+$calDay = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 $calStartDay = 0;
 $calToday = date('Y-m-d');
 $calBeginWeek = date('Y-m-d', strtotime("last {$calDay[$calStartDay]}", strtotime($calToday)));

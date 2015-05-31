@@ -33,7 +33,7 @@ class Menu extends AppModel {
                 $name = $menu['Menu']['name'];
                 $name_en = $menu['Menu']['name_en'];
                 $parent = $menu['Menu']['id'];
-                $result[] = ['link'=>$link, 'name'=>$name, 'name_en'=>$name_en, 'sub'=>$this->accessible_menu($type, $parent)];
+                $result[] = array('link'=>$link, 'name'=>$name, 'name_en'=>$name_en, 'sub'=>$this->accessible_menu($type, $parent));
             }
         }
 
