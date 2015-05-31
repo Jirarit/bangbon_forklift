@@ -26,7 +26,7 @@ class ProductCategoriesController extends AppController {
         if ($this->request->is('post')) {
             $search = $this->request->data['ProductCategory']['search'];
             $this->Paginator->settings = array(
-                'conditions' => array('OR' => ['ProductCategory.name ILIKE' => "%{$search}%", 'ProductCategory.name_en ILIKE' => "%{$search}%"]),
+                'conditions' => array('OR' => array('ProductCategory.name ILIKE' => "%{$search}%", 'ProductCategory.name_en ILIKE' => "%{$search}%")),
                 'limit' => 10
             );
         }

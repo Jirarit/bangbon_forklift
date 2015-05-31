@@ -26,7 +26,7 @@ class ProductBrandsController extends AppController {
         if ($this->request->is('post')) {
             $search = $this->request->data['ProductBrand']['search'];
             $this->Paginator->settings = array(
-                'conditions' => array('OR' => ['ProductBrand.name ILIKE' => "%{$search}%", 'ProductBrand.name_en ILIKE' => "%{$search}%"]),
+                'conditions' => array('OR' => array('ProductBrand.name ILIKE' => "%{$search}%", 'ProductBrand.name_en ILIKE' => "%{$search}%")),
                 'limit' => 10
             );
         }
@@ -103,7 +103,7 @@ class ProductBrandsController extends AppController {
 		if (!$this->ProductBrand->exists()) {
 			throw new NotFoundException(__('Invalid product brand'));
 		}
-		$data = [];
+		$data = array();
         $data['ProductBrand']['id'] = $id;
         $data['ProductBrand']['enable'] = 'D';
 		if ($this->ProductBrand->save($data)) {
