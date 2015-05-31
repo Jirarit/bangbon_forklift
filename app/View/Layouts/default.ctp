@@ -141,9 +141,10 @@ $menus = [];
                                 echo "<small>{$name}</small> {$pic}";
                             ?>
 						</a>
+                        <?php /*
 						<ul class="dropdown-menu dropdown-user">
 							<li>
-								<a href="/User/view/<?php echo $_SESSION['USER']['id'] ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
+								<a href="/Users/view/<?php echo $_SESSION['USER']['id'] ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
 							</li>
 							<li>
 								<a href="#"><i class="fa fa-key fa-fw"></i> Change Password</a>
@@ -155,6 +156,7 @@ $menus = [];
 							<li><a href="/Authens/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
 							</li>
 						</ul>
+                        */ ?>
 					</li>
 					<!-- /.User Info for desktop-->
 
