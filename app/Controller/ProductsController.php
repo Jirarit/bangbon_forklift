@@ -89,8 +89,8 @@ class ProductsController extends AppController {
         $this->request->data = $this->Session->read('ADD_PRODUCT');
         if(empty($this->request->data['Product']['price'])) $this->request->data['Product']['price'] = '0.00';
         if(empty($this->request->data['Product']['cost'])) $this->request->data['Product']['cost'] = '0.00';
-        $this->set('category_opt', $this->ProductCategory->find('list',array('conditions'=>['enable'=>'Y'], 'order'=>array('sort', 'name'))));
-        $this->set('brand_opt', $this->ProductBrand->find('list',array('conditions'=>['enable'=>'Y'], 'order'=>array('name'))));
+        $this->set('category_opt', $this->ProductCategory->find('list',array('conditions'=>array('enable'=>'Y'), 'order'=>array('sort', 'name'))));
+        $this->set('brand_opt', $this->ProductBrand->find('list',array('conditions'=>array('enable'=>'Y'), 'order'=>array('name'))));
 	}
 
     public function add_property() {
@@ -204,8 +204,8 @@ class ProductsController extends AppController {
 			$options = array('conditions' => array('Product.' . $this->Product->primaryKey => $id));
 			$this->request->data = $this->Product->find('first', $options);
 		}
-        $this->set('category_opt', $this->ProductCategory->find('list',array('conditions'=>['enable'=>'Y'], 'order'=>['sort', 'name'])));
-        $this->set('brand_opt', $this->ProductBrand->find('list',array('conditions'=>['enable'=>'Y'], 'order'=>['name'])));
+        $this->set('category_opt', $this->ProductCategory->find('list',array('conditions'=>array('enable'=>'Y'), 'order'=>array('sort', 'name'))));
+        $this->set('brand_opt', $this->ProductBrand->find('list',array('conditions'=>array('enable'=>'Y'), 'order'=>array('name'))));
 	}
 
     public function edit_property($id = null) {
