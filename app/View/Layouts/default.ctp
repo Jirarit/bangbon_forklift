@@ -30,7 +30,7 @@ $enableAcl = TRUE;
 $calDay = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 $calStartDay = 0;
 $calToday = date('Y-m-d');
-$calBeginWeek = date('Y-m-d', strtotime("last {$calDay[$calStartDay]}", strtotime($calToday)));
+$calBeginWeek = (date('w', strtotime($calToday)) == $calStartDay) ? $calToday : date('Y-m-d', strtotime("last {$calDay[$calStartDay]}", strtotime($calToday)));
 
 /* Variable left menu
 $menus = [];
