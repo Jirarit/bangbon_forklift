@@ -26,7 +26,7 @@ class UsersController extends AppController {
         if ($this->request->is('post')) {
             $search = $this->request->data['User']['search'];
             $this->Paginator->settings = array(
-                'conditions' => array('OR' => ['User.login ILIKE' => "%{$search}%", 'User.name ILIKE' => "%{$search}%"]),
+                'conditions' => array('OR' => array('User.login ILIKE' => "%{$search}%", 'User.name ILIKE' => "%{$search}%")),
                 'limit' => 10
             );
         }
@@ -103,7 +103,7 @@ class UsersController extends AppController {
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}
-		$data = [];
+		$data = array();
         $data['User']['id'] = $id;
         $data['User']['enable'] = 'D';
 		if ($this->User->save($data)) {
