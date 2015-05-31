@@ -27,7 +27,7 @@ class CustomersController extends AppController {
         if ($this->request->is('post')) {
             $search = $this->request->data['Customer']['search'];
             $this->Paginator->settings = array(
-                'conditions' => array('OR' => ['Customer.name ILIKE' => "%{$search}%", 'Customer.name_en ILIKE' => "%{$search}%"]),
+                'conditions' => array('OR' => array('Customer.name ILIKE' => "%{$search}%", 'Customer.name_en ILIKE' => "%{$search}%")),
                 'limit' => 10
             );
         }
